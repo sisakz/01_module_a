@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C16</title>
+    <style>
+        .buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .button {
+            width: 40px;
+            aspect-ratio: 1;
+        }
+        canvas {
+            border: 1px solid lightgray;
+        }
+        .container {
+            position: relative;
+        }
+
+        .button#black { background-color: black; }
+        .button#red { background-color: red; }
+        .button#yellow { background-color: yellow; }
+        .button#green { background-color: green; }
+        .button#blue { background-color: blue; }
+
+        #handle {
+            width: 10px;
+            aspect-ratio: 1;
+            background-color: lightgray;            
+            border: 1px solid gray;
+            cursor: se-resize;
+            position: absolute;
+            top: 300px;
+            left: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="buttons">
+        <div class="button" id="black"></div>
+        <div class="button" id="red"></div>
+        <div class="button" id="yellow"></div>
+        <div class="button" id="green"></div>
+        <div class="button" id="blue"></div>
+    </div>
+    <div class="container" id="container">
+        <canvas width="300" height="300"></canvas>
+        <div id="handle"></div>
+    </div>
+    <div class="downloads">
+        <button id="jpg">Save to jpg</button>
+        <button id="png">Save to png</button>
+    </div>
+    <script>
+        let drawing = false
+        let resizing = false
+        let color = "black"
+        const canvas = document.querySelector("canvas")
+        const ctx = canvas.getContext('2d')
+        const handle = document.getElementById("handle")
+        let data
+
+        let x
+        let y
+
+        ctx.fillStyle = "#fff"
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+        canvas.onmousedown = e => {
+            drawing = true
+            x = e.offsetX
+            y = e.offsetY
+        }
+
+        canvas.onmousemove = e => {
+            if (!drawing) return
+            ctx.strokeStyle = color
+            ctx.lineWidth = 3
+            ctx.lineCap = "round"
+            ctx.lineJoin = "round"
+
+            ctx.beginPath()
+            ctx.moveTo(x, y)
+            ctx.lineTo(e.offsetX, e.offsetY)
+            ctx.stroke()
+
+            x = e.offsetX
+            y = e.offsetY
+        }
+
+        document.onmouseup = e => {
+            drawing = false
+            resizing = false
+        }
+
+        handle.onmousedown = e => {
+            resizing = true
+            data = ctx.getImageData(0, 0, canvas.width, canvas.height)
+        }
+
+        document.onmousemove = e => {
+            if (!resizing) return
+            const rect = document.getElementById("container").getBoundingClientRect()
+            const x = e.clientX - rect.x
+            const y = e.clientY - rect.y
+            canvas.width = x
+            canvas.height = y
+            handle.style.top = y + "px"
+            handle.style.left = x + "px"
+            ctx.fillStyle = "#fff"
+
+            ctx.fillRect(0, 0, canvas.width, canvas.height)
+            ctx.putImageData(data, 0, 0)
+
+        }
+
+        document.getElementById("black").onclick = e => color = "black"
+        document.getElementById("red").onclick = e => color = "red"
+        document.getElementById("yellow").onclick = e => color = "yellow"
+        document.getElementById("green").onclick = e => color = "green"
+        document.getElementById("blue").onclick = e => color = "blue"
+
+        const download = (format) => {
+            const data = canvas.toDataURL("image/"+format)
+            const a = document.createElement("a")
+            a.href = data
+            a.download = "image." + format
+            a.click()
+        }
+
+        document.getElementById("jpg").onclick = () => download("jpg")
+        document.getElementById("png").onclick = () => download("png")
+    </script>
+</body>
+</html>

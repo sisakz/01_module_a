@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C25</title>
+    <style>
+        * {
+            cursor: none;
+        }
+        #cursor {
+            width: 30px;
+            height: 30px;
+            background-color: #000;
+            position: fixed;
+            clip-path: polygon(0% 0%, 100% 0, 35% 35%, 0 100%);
+            z-index: 999;
+        }
+        #animation {
+            width: 50px;
+            aspect-ratio: 1;
+            background-color: rgba(0,0,0,0.3);
+            border-radius: 100%;
+            position: fixed;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+        }
+
+        #animation.anim {
+            animation: anim 0.3s linear;
+        }
+
+        @keyframes anim {
+            0% {
+                transform:  translate(-50%, -50%) scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform:  translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%)  scale(2);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="cursor"></div>
+    <div id="animation"></div>
+    <script>
+        const cursor = document.getElementById("cursor")
+        const animation = document.getElementById("animation")
+        document.onmousemove = e => {
+            cursor.style.top = e.clientY + "px"
+            cursor.style.left = e.clientX + "px"
+            animation.style.top = e.clientY + "px"
+            animation.style.left = e.clientX + "px"
+        }
+        let timeout
+        document.onmousedown = e => {
+            if (timeout) {
+                clearTimeout(timeout)
+                timeout = null
+                animation.classList.remove("anim")
+                setTimeout(() => animation.classList.add("anim"), 10)
+            } else {
+                animation.classList.add("anim")
+
+            }
+            
+
+            timeout = setTimeout(() => {
+                animation.classList.remove("anim")
+                timeout = null
+            }, 400)
+        }
+    </script>
+</body>
+</html>

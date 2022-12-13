@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B7</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        .flag {
+            width: 450px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .bar {
+            width: 360px;
+            height: 80px;
+            position: absolute;
+            display: flex;
+            justify-content: space-between;
+            gap: 6px;
+
+        }
+
+        .bar:nth-child(1) {
+            transform: rotate(30deg);
+        }
+        .bar:nth-child(2) {
+            transform: rotate(-30deg);
+        }
+        .bar .accent {
+            display: flex;
+            gap: 6px;
+        }
+        .bar .accent .accent-row {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+
+        }
+        .bar .accent .accent-row .accent-bar {
+            width: 13px;
+            background-color: #000;
+            flex: 1;
+            gap: 6px;
+        }
+        .circle {
+            background: linear-gradient(crimson 50%, darkblue 50%);
+            width: 170px;
+            aspect-ratio: 1;
+            border-radius: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: rotate(35deg);
+        }
+        .circle .small-circle {
+            flex: 1;
+            width: calc(170px / 2);
+            aspect-ratio: 1;
+            border-radius: 100%;
+        }
+        .circle .small-circle:nth-child(1) {
+            background-color: crimson;
+        }
+        .circle .small-circle:nth-child(2) {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="flag">
+        <div class="bar">
+            <div class="accent">
+                <div class="accent-row">
+                    <div class="accent-bar"></div>
+                </div>
+                <div class="accent-row">
+                    <div class="accent-bar"></div>
+                </div>
+                <div class="accent-row">
+                    <div class="accent-bar"></div>
+                </div>
+            </div>
+            <div class="accent">
+                <div class="accent-row">
+                    <div class="accent-bar"></div>
+                    <div class="accent-bar"></div>
+                </div>
+                <div class="accent-row">
+                    <div class="accent-bar"></div>
+                    <div class="accent-bar"></div>
+                </div>
+                <div class="accent-row">
+                    <div class="accent-bar"></div>
+                    <div class="accent-bar"></div>
+                </div>
+            </div>
+        </div>
+        <div class="bar">
+            <div class="accent">
+                <div class="accent-row">
+                    <div class="accent-bar"></div>
+                </div>
+                <div class="accent-row">
+                    <div class="accent-bar"></div>
+                    <div class="accent-bar"></div>
+                </div>
+                <div class="accent-row">
+                    <div class="accent-bar"></div>
+                </div>
+            </div>
+            <div class="accent">
+                <div class="accent-row">
+                    <div class="accent-bar"></div>
+                    <div class="accent-bar"></div>
+                </div>
+                <div class="accent-row">
+                    <div class="accent-bar"></div>
+                </div>
+                <div class="accent-row">
+                    <div class="accent-bar"></div>
+                    <div class="accent-bar"></div>
+                </div>
+            </div>
+        </div>
+        <div class="circle">
+            <div class="small-circle"></div>
+            <div class="small-circle"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B10</title>
+    <style>
+        .stars {
+            width: 400px;
+            position: relative;
+            display: flex;
+        }
+        .empty, .filled {
+            width: 400px;
+            position: absolute;
+        }
+
+        img {
+            width: 400px;
+        }
+
+        .filled {
+            max-width: 0%;
+            overflow: hidden;
+            transition: all 0.4s ease-out;
+        }
+
+        .bar {
+            flex: 1;
+            height: 80px;
+            z-index: 999;
+            cursor: pointer;
+        }
+
+        .bar:nth-child(1):hover ~ .filled { max-width: 10%; }
+        .bar:nth-child(2):hover ~ .filled { max-width: 20%; }
+        .bar:nth-child(3):hover ~ .filled { max-width: 30%; }
+        .bar:nth-child(4):hover ~ .filled { max-width: 40%; }
+        .bar:nth-child(5):hover ~ .filled { max-width: 50%; }
+        .bar:nth-child(6):hover ~ .filled { max-width: 60%; }
+        .bar:nth-child(7):hover ~ .filled { max-width: 70%; }
+        .bar:nth-child(8):hover ~ .filled { max-width: 80%; }
+        .bar:nth-child(9):hover ~ .filled { max-width: 90%; }
+        .bar:nth-child(10):hover ~ .filled { max-width: 100%; }
+    </style>
+</head>
+<body>
+    <div class="stars">
+        
+        
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+
+        <div class="empty">
+            <img src="stars.png" alt="*****">
+        </div>
+        <div class="filled">
+            <img src="stars-filled.png" alt="*****">
+        </div>
+    </div>
+</body>
+</html>

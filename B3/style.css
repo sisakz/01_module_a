@@ -1,0 +1,39 @@
+/**
+Your Code
+ */
+.photos {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: repeat(3, 136px);
+    max-height: calc(3* 136px + (2*2px));
+    overflow: hidden;
+    position: relative;
+}
+
+.photo-item {
+    counter-increment: photos;
+}
+
+.photo-item:nth-child(10) {
+    counter-reset: photos;
+}
+
+.photos:has(.photo-item:nth-child())::after {
+    content: "+ " counter(photos);
+
+}
+
+.photos::after {
+    width: 132px;
+    height: 136px;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 1.5rem;
+    right: 0;
+    bottom: 0;
+    border-radius: 5px;
+}
